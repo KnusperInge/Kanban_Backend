@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-&zc2_(ry4kv5&b(xj)2+e8p&dl=2j*id&*4$fh(a80%l--z99s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['KnusperInge.pythonanywhere.com']
+ALLOWED_HOSTS = ['KnusperInge.pythonanywhere.com', '127.0.0.1', 'localhost',]
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -37,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
+    'Kanban_App',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -47,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'Kanban.urls'
@@ -130,3 +138,15 @@ MEDIA_ROOT = '/home/KnusperInge/Kanban/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/KnusperInge/Kanban/static'
 STATIC_URL = '/static/'
+
+DEBUG = True
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+
+}
