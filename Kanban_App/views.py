@@ -156,7 +156,8 @@ class Taskview_Set(viewsets.ModelViewSet):
                     instance .save()
 
                 else:
-                    st_obj = Subtask.objects.create(message=st['message'])
+                    st_obj = Subtask.objects.create(
+                        message=st['message'], task_id=queryset.id)
                     queryset.subtasks.add(st_obj)
 
             serializer = TodosSerializer(queryset, data, partial=True)
