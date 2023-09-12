@@ -179,12 +179,6 @@ class Taskview_Set(viewsets.ModelViewSet):
 
         else:
             queryset = ToDo.objects.get(id=kwargs['pk'])
-            data = Subtask.objects.filter(subtasks__id=kwargs['pk'])
-
-            for st in data:
-                st_obj = Subtask.objects.get(id=st.id)
-                st_obj.delete()
-
             queryset.delete()
 
             return Response("successfully deleted", status=status.HTTP_200_OK)
