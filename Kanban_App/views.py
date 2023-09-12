@@ -39,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
 
         group = Group.objects.filter(user__id=request.user.pk).first()
-        print(group)
+
         if group.name == 'leader':
             queryset = User.objects.all()
             serializer = UserSeriallizer(queryset, many=True)
@@ -95,7 +95,6 @@ class Taskview_Set(viewsets.ModelViewSet):
 
 # ANCHOR - get Tasks
 
-
     def list(self, request):
         if ToDo.objects.filter(author=request.user.pk):
             all = ToDo.objects.filter(author=request.user.pk)
@@ -125,6 +124,7 @@ class Taskview_Set(viewsets.ModelViewSet):
         for subtask in data['subtasks']:
             sub_obj = Subtask.objects.create(
                 message=subtask['message'],
+                task_id=new_task.id
             )
             new_task.subtasks.add(sub_obj)
 

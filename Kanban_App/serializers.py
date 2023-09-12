@@ -29,9 +29,11 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class SubtaskSerializer(serializers.ModelSerializer):
+    task = serializers.RelatedField(source="ToDo", read_only=True)
+
     class Meta:
         model = Subtask
-        fields = ['id', 'message', 'status']
+        fields = ['id', 'message', 'status', 'task']
 
 
 class TodosSerializer(serializers.ModelSerializer):
